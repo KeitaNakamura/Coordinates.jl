@@ -20,11 +20,12 @@ end
     @inbounds A[I.indices...]
 end
 
-struct Coordinate{N, T, AT <: AbstractVector{T}} <: AbstractCoordinate{N, T}
-    axes::NTuple{N, AT}
+struct Coordinate{N, T, Axis <: AbstractVector{T}} <: AbstractCoordinate{N, T}
+    axes::NTuple{N, Axis}
 end
 
 Coordinate(axes::AbstractVector...) = Coordinate(axes)
+Coordinate{N}(ax::AbstractVector) where {N} = Coordinate(ntuple(i -> ax, Val(N)))
 
 coordinateaxes(C::Coordinate) = C.axes
 

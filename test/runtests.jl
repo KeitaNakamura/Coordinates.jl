@@ -1,37 +1,31 @@
 using Coordinates
 using Test
 
-function check_coordinate(axs::NTuple{N, AT}) where {N, T, AT <: AbstractVector{T}}
-    A = (@inferred Coordinate(axs))::Coordinate{N, T, AT}
-    @test all(CartesianIndices(A)) do I
-        (@inferred A[I])::NTuple{N, T} == getindex.(axs, Tuple(I))
+function check_coordinate(coord::Coordinate{N, T}, axes::Tuple) where {N, T}
+    @test all(CartesianIndices(coord)) do I
+        (@inferred coord[I])::NTuple{N, T} == getindex.(axes, Tuple(I))
     end
-    @test size(A) == length.(axs)
-    @test coordinateaxes(A) == axs
+    @test size(coord) == length.(axes)
+    @test coordinateaxes(coord) == axes
 end
+check_coordinate(coord::Coordinate{N}, ax) where {N} = check_coordinate(coord, ntuple(i -> ax, Val(N)))
 
-@testset "Coordinate" begin
-    @testset "UnitRange" begin
-        for N in (1, 2)
-            axs = ntuple(i -> 1:rand(1:10), N)
-            check_coordinate(axs)
+@testset "Constructors" begin
+    for T in (Float32, Float64), N in (1,2,3)
+        # from tuple
+        for axs in (ntuple(i -> 1:rand(T(1):10), N),
+                    ntuple(i -> 1:rand(T):rand(2:10), N),
+                    ntuple(i -> rand(T, rand(1:10)), N),)
+            C = (@inferred Coordinate(axs))::Coordinate{N, T, eltype(axs)}
+            C = (@inferred Coordinate(axs...))::Coordinate{N, T, eltype(axs)}
+            check_coordinate(C, axs)
         end
-    end
-    @testset "StepRange" begin
-        for T in (Float32, Float64)
-            for N in (1, 2)
-                step = rand(T)
-                axs = ntuple(i -> 1:step:rand(2:10), N)
-                check_coordinate(axs)
-            end
-        end
-    end
-    @testset "Vector" begin
-        for T in (Float32, Float64)
-            for N in (1, 2)
-                axs = ntuple(i -> rand(T, rand(1:10)), N)
-                check_coordinate(axs)
-            end
+        # from axis
+        for axis in (1:rand(T(1):10),
+                     1:rand(T):rand(2:10),
+                     rand(T, rand(1:10)),)
+            C = (@inferred Coordinate{N}(axis))::Coordinate{N, T, typeof(axis)}
+            check_coordinate(C, axis)
         end
     end
 end
