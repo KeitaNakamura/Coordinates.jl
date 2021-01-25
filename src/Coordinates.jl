@@ -20,6 +20,30 @@ end
     @inbounds A[I.indices...]
 end
 
+"""
+    Coordinate(axes::AbstractVector...)
+    Coordinate{N}(axis::AbstractVector)
+
+Construct `Coordinate` from `axes`.
+If only single `axis` is given with specified number of dimensions `N`,
+`axis` is used for all dimensions.
+
+# Examples
+```jldoctest
+julia> Coordinate(1:3, 2:4)
+3×3 Coordinate{2,Int64,UnitRange{Int64}}:
+ (1, 2)  (1, 3)  (1, 4)
+ (2, 2)  (2, 3)  (2, 4)
+ (3, 2)  (3, 3)  (3, 4)
+
+julia> Coordinate{2}(0.0:3.0)
+4×4 Coordinate{2,Float64,StepRangeLen{Float64,Base.TwicePrecision{Float64},Base.TwicePrecision{Float64}}}:
+ (0.0, 0.0)  (0.0, 1.0)  (0.0, 2.0)  (0.0, 3.0)
+ (1.0, 0.0)  (1.0, 1.0)  (1.0, 2.0)  (1.0, 3.0)
+ (2.0, 0.0)  (2.0, 1.0)  (2.0, 2.0)  (2.0, 3.0)
+ (3.0, 0.0)  (3.0, 1.0)  (3.0, 2.0)  (3.0, 3.0)
+```
+"""
 struct Coordinate{N, T, Axis <: AbstractVector{T}} <: AbstractCoordinate{N, T}
     axes::NTuple{N, Axis}
 end
