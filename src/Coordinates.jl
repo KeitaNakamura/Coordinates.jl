@@ -28,7 +28,7 @@ end
 
 Construct `Coordinate` from `axes`.
 If only single `axis` is given with specified number of dimensions `N`,
-`axis` is used for all dimensions.
+the `axis` is used for all dimensions.
 
 # Examples
 ```jldoctest
