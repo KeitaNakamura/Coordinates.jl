@@ -1,5 +1,7 @@
 module Coordinates
 
+using Base: @_propagate_inbounds_meta
+
 export AbstractCoordinate, Coordinate, coordinateaxes
 
 abstract type AbstractCoordinate{N, T} <: AbstractArray{NTuple{N, T}, N} end
@@ -52,5 +54,6 @@ Coordinate(axes::AbstractVector...) = Coordinate(axes)
 Coordinate{N}(ax::AbstractVector) where {N} = Coordinate(ntuple(i -> ax, Val(N)))
 
 coordinateaxes(C::Coordinate) = C.axes
+coordinateaxes(C::Coordinate, i::Int) = (@_propagate_inbounds_meta; coordinateaxes(C)[i])
 
 end # module
