@@ -17,7 +17,7 @@ end
     @boundscheck checkbounds(A, I...)
     @inbounds typeof(A)(map(getindex, coordinateaxes(A), I))
 end
-@inline function Base.getindex(A::AbstractCoordinate{N}, I::CartesianIndices) where {N}
+@inline function Base.getindex(A::AbstractCoordinate{N}, I::CartesianIndices{N}) where {N}
     @boundscheck checkbounds(A, I)
     @inbounds A[I.indices...]
 end
