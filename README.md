@@ -11,7 +11,18 @@
 pkg> add https://github.com/KeitaNakamura/Coordinates.jl.git
 ```
 
-## Examples
+## Usage
+
+```julia
+Coordinate(axes::AbstractVector...)
+Coordinate{N}(axis::AbstractVector)
+```
+
+Construct `Coordinate` from `axes`.
+If only single `axis` is given with specified number of dimensions `N`,
+the `axis` is used for all dimensions.
+
+### Examples
 
 ```julia
 julia> Coordinate(1:3, 2:4)
