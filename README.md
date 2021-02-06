@@ -8,7 +8,7 @@
 ## Installation
 
 ```julia
-pkg> add https://github.com/KeitaNakamura/Coordinates.jl.git
+pkg> add Coordinates
 ```
 
 ## Usage
