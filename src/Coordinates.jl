@@ -80,11 +80,11 @@ Base.size(A::Coordinate) = map(length, coordinateaxes(A))
         @inbounds @ntuple $N i -> coordinateaxes(A, i)[I[i]]
     end
 end
-@generated function Base.getindex(A::Coordinate{N}, I::Vararg{Union{AbstractUnitRange, Colon}, N}) where {N}
+@generated function Base.getindex(A::Coordinate{N}, I::Vararg{Union{Int, AbstractUnitRange, Colon}, N}) where {N}
     quote
         @_inline_meta
         @boundscheck checkbounds(A, I...)
-        @inbounds typeof(A)(@ntuple $N i -> coordinateaxes(A, i)[I[i]])
+        @inbounds Coordinate(@ntuple $N i -> coordinateaxes(A, i)[I[i]])
     end
 end
 @inline function Base.getindex(A::Coordinate{N}, I::CartesianIndices{N}) where {N}

@@ -39,10 +39,14 @@ end
 
 @testset "Operations" begin
     @testset "subarray" begin
-        x = Coordinate(1:4, [1,2,3])
-        sub = Coordinate(2:3, [1,2])
-        (@inferred x[2:3, 1:2])::typeof(sub) == sub
-        (@inferred x[CartesianIndices((2:3, 1:2))])::typeof(sub) == sub
+        x = Coordinate(1:4, [2,3,4])
+        sub = Coordinate(2:3, [2,3])
+        vec = Coordinate(1:4, 3)
+        rowvec = Coordinate(3, [3,4])
+        @test (@inferred x[2:3, 1:2])::typeof(sub) == sub
+        @test (@inferred x[CartesianIndices((2:3, 1:2))])::typeof(sub) == sub
+        @test (@inferred x[:, 2])::typeof(vec) == vec
+        @test (@inferred x[3, 2:3])::typeof(rowvec) == rowvec
     end
     @testset "transpose" begin
         x = Coordinate(1:2, [1,2,3])
