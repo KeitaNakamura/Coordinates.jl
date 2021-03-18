@@ -38,6 +38,12 @@ check_coordinate(coord::Coordinate{N}, ax) where {N} = check_coordinate(coord, n
 end
 
 @testset "Operations" begin
+    @testset "subarray" begin
+        x = Coordinate(1:4, [1,2,3])
+        sub = Coordinate(2:3, [1,2])
+        (@inferred x[2:3, 1:2])::typeof(sub) == sub
+        (@inferred x[CartesianIndices((2:3, 1:2))])::typeof(sub) == sub
+    end
     @testset "transpose" begin
         x = Coordinate(1:2, [1,2,3])
         xᵀ = Coordinate([1,2,3], 1:2)
