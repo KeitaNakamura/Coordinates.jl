@@ -19,7 +19,7 @@ Coordinate{N}(axis)
 ```
 
 Construct `Coordinate` from `axes`.
-If only single `axis` is given with specified number of dimensions `N`,
+If only single `axis` is given with number of dimensions `N`,
 the `axis` is used for all dimensions.
 
 ### Examples
