@@ -10,7 +10,7 @@ function check_coordinate(coord::Coordinate{N, ElType}, axes::Tuple) where {N, E
 end
 check_coordinate(coord::Coordinate{N}, ax) where {N} = check_coordinate(coord, ntuple(i -> ax, Val(N)))
 
-@testset "Coordinate" begin
+@testset "Constructors" begin
     @test (@inferred Coordinate{2, Tuple{Int, Float64}, Tuple{UnitRange{Int}, Vector{Float64}}}((1:2, [2.0,3.0]))).axes == (1:2, [2.0,3.0])
     @test (@inferred Coordinate{2, Tuple{Int, Char}, Tuple{UnitRange{Int}, String}}((1:2, "abc"))).axes == (1:2, "abc")
     @test_throws ArgumentError Coordinate{2, Tuple{Float64, Float64}, Tuple{UnitRange{Int}, Vector{Float64}}}((1:2, [2.0,3.0]))
@@ -34,5 +34,14 @@ check_coordinate(coord::Coordinate{N}, ax) where {N} = check_coordinate(coord, n
             C = (@inferred Coordinate{N}(axis))::Coordinate{N, ElType, typeof(axes)}
             check_coordinate(C, axis)
         end
+    end
+end
+
+@testset "Operations" begin
+    @testset "transpose" begin
+        x = Coordinate(1:2, [1,2,3])
+        xᵀ = Coordinate([1,2,3], 1:2)
+        @test (@inferred adjoint(x))::typeof(xᵀ) == xᵀ
+        @test (@inferred transpose(x))::typeof(xᵀ) == xᵀ
     end
 end

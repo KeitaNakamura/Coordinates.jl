@@ -78,4 +78,7 @@ end
     @inbounds A[I.indices...]
 end
 
+Base.transpose(c::Coordinate{2}) = Coordinate(coordinateaxes(c, 2), coordinateaxes(c, 1))
+Base.adjoint(c::Coordinate{2}) = transpose(c)
+
 end # module
