@@ -6,9 +6,23 @@ Coordinate{N}(axis)</code></pre><p>Construct <code>Coordinate</code> from <code>
  (2, 2)  (2, 3)  (2, 4)
  (3, 2)  (3, 3)  (3, 4)
 
-julia&gt; Coordinate{2}(0.0:3.0)
-4×4 Coordinate{2,Tuple{Float64,Float64},Tuple{StepRangeLen{Float64,Base.TwicePrecision{Float64},Base.TwicePrecision{Float64}},StepRangeLen{Float64,Base.TwicePrecision{Float64},Base.TwicePrecision{Float64}}}}:
- (0.0, 0.0)  (0.0, 1.0)  (0.0, 2.0)  (0.0, 3.0)
- (1.0, 0.0)  (1.0, 1.0)  (1.0, 2.0)  (1.0, 3.0)
- (2.0, 0.0)  (2.0, 1.0)  (2.0, 2.0)  (2.0, 3.0)
- (3.0, 0.0)  (3.0, 1.0)  (3.0, 2.0)  (3.0, 3.0)</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/KeitaNakamura/Coordinates.jl/blob/3dfba0638ac8c42082fb8ba47495b1f9115a6e16/src/Coordinates.jl#L8-L31">source</a></section></article></article><nav class="docs-footer"><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Thursday 18 March 2021 04:22">Thursday 18 March 2021</span>. Using Julia version 1.5.4.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+julia&gt; Coordinate(1:2, [3.0,4.0], &quot;abc&quot;)
+2×2×3 Coordinate{3,Tuple{Int64,Float64,Char},Tuple{UnitRange{Int64},Array{Float64,1},String}}:
+[:, :, 1] =
+ (1, 3.0, &#39;a&#39;)  (1, 4.0, &#39;a&#39;)
+ (2, 3.0, &#39;a&#39;)  (2, 4.0, &#39;a&#39;)
+
+[:, :, 2] =
+ (1, 3.0, &#39;b&#39;)  (1, 4.0, &#39;b&#39;)
+ (2, 3.0, &#39;b&#39;)  (2, 4.0, &#39;b&#39;)
+
+[:, :, 3] =
+ (1, 3.0, &#39;c&#39;)  (1, 4.0, &#39;c&#39;)
+ (2, 3.0, &#39;c&#39;)  (2, 4.0, &#39;c&#39;)
+
+julia&gt; Coordinate{2}(0:3)
+4×4 Coordinate{2,Tuple{Int64,Int64},Tuple{UnitRange{Int64},UnitRange{Int64}}}:
+ (0, 0)  (0, 1)  (0, 2)  (0, 3)
+ (1, 0)  (1, 1)  (1, 2)  (1, 3)
+ (2, 0)  (2, 1)  (2, 2)  (2, 3)
+ (3, 0)  (3, 1)  (3, 2)  (3, 3)</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/KeitaNakamura/Coordinates.jl/blob/e6598660fbadf2c8b4ba872cd0174121966e7147/src/Coordinates.jl#L8-L45">source</a></section></article></article><nav class="docs-footer"><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Thursday 18 March 2021 04:32">Thursday 18 March 2021</span>. Using Julia version 1.5.4.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
