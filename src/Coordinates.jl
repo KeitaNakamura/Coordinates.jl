@@ -72,6 +72,10 @@ coordinateaxes(C::Coordinate, i::Int) = (@_propagate_inbounds_meta; coordinateax
 
 Base.size(A::Coordinate) = map(length, coordinateaxes(A))
 
+_eachindex(x) = firstindex(x):lastindex(x)
+_eachindex(x::AbstractArray) = eachindex(x)
+Base.axes(A::Coordinate) = map(_eachindex, coordinateaxes(A))
+
 # getindex
 @generated function Base.getindex(A::Coordinate{N}, I::Vararg{Int, N}) where {N}
     quote
