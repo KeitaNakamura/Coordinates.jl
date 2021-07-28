@@ -73,9 +73,7 @@ coordinateaxes(C::Coordinate, i::Int) = (@_propagate_inbounds_meta; coordinateax
 Base.size(A::Coordinate) = map(length, coordinateaxes(A))
 
 _eachindex(x) = firstindex(x):lastindex(x)
-_eachindex(x::AbstractArray) = eachindex(x)
-_eachindex(x::AbstractVector) = only(axes(x)) # should return Base.OneTo
-_eachindex(x::Tuple) = only(axes(x))          # should return Base.OneTo
+_eachindex(x::Union{AbstractArray, Tuple}) = eachindex(x)
 Base.axes(A::Coordinate) = map(_eachindex, coordinateaxes(A))
 
 # getindex
