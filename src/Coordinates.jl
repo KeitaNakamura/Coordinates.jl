@@ -43,7 +43,7 @@ julia> Coordinate{2}(0:3)
  (3, 0)  (3, 1)  (3, 2)  (3, 3)
 ```
 """
-struct Coordinate{N, ElType, Axes <: Tuple{Vararg{Any, N}}} <: AbstractArray{ElType, N}
+struct Coordinate{N, ElType <: Tuple{Vararg{Any, N}}, Axes <: Tuple{Vararg{Any, N}}} <: AbstractArray{ElType, N}
     axes::Axes
     function Coordinate{N, ElType, Axes}(axes::Axes) where {N, ElType, Axes}
         check_coordinate_parameter(Val(N), ElType, Axes)

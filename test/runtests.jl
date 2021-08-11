@@ -1,7 +1,7 @@
 using Coordinates
 using Test
 
-function check_coordinate(coord::Coordinate{N, ElType}, axes::Tuple) where {N, ElType}
+function check_coordinate(coord::Coordinate{N, ElType}, axes::Tuple) where {N, ElType <: Tuple{Vararg{Any, N}}}
     @test all(CartesianIndices(coord)) do I
         (@inferred coord[I])::ElType == getindex.(axes, Tuple(I))
     end
